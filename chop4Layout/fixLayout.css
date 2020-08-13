@@ -1,0 +1,11 @@
+div[class*="Grid__Grid"] > div:nth-child(2) {
+  grid-column: 2 / span 2;
+}
+
+div[class*="Grid__Grid"] > div:nth-child(4) {
+  grid-row: 2;
+}
+
+div[class*="Grid__Grid"] > div:nth-child(4) > div:nth-child(1) {
+  margin-top: 0px;
+}

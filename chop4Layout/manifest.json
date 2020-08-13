@@ -1,0 +1,12 @@
+{
+  "name": "ChOP Layout Extension",
+  "version": "1.0",
+  "description": "Fixes the ChOP v4 Layout",
+  "content_scripts": [
+    {
+      "matches": ["https://gtlive.online.church/*"],
+      "css": ["fixLayout.css"]
+    }
+  ],
+  "manifest_version": 2
+}
