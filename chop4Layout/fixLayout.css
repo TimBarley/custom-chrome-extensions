@@ -8,4 +8,5 @@ div[class*="Grid__Grid"] > div:nth-child(4) {
 
 div[class*="Grid__Grid"] > div:nth-child(4) > div:nth-child(1) {
   margin-top: 0px;
+  height: calc(100% - 8px);
 }
