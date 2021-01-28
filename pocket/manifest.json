@@ -1,0 +1,13 @@
+{
+  "name": "Pocket Fixer Extension",
+  "version": "1.0",
+  "description": "Fixes the Pocket External Link Bury Issue",
+  "content_scripts": [
+    {
+      "matches": ["https://getpocket.com/my-list"],
+      "css": ["showActions.css"],
+      "js": ["modifyActions.js"]
+    }
+  ],
+  "manifest_version": 2
+}
