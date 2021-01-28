@@ -18,19 +18,19 @@ window.addEventListener('load', async () => {
     articles = document.getElementsByTagName('article');
     await sleep(50);
   }
+
   processElements();
+
+  addObserver(articles[0].parentNode);
 });
 
-window.addEventListener(
-  'scroll',
-  () => {
-    window.clearTimeout(isScrolling);
-    isScrolling = setTimeout(() => {
-      processElements();
-    }, 66);
-  },
-  false,
-);
+const addObserver = (node) => {
+  const observer = new MutationObserver((_) => {
+    processElements();
+  });
+
+  observer.observe(node, { childList: true });
+};
 
 const addNewElementToArticle = (article) => {
   const redirectUrl = getUrl(article);
