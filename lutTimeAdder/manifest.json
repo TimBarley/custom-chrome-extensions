@@ -1,0 +1,13 @@
+{
+  "name": "LUT Time Adder",
+  "version": "1.0",
+  "description": "Adds totally time to LUT site",
+  "content_scripts": [
+    {
+      "matches": ["https://www.leveluptutorials.com/tutorials/*"],
+      "css": ["showTime.css"],
+      "js": ["calculateTime.js"]
+    }
+  ],
+  "manifest_version": 2
+}
