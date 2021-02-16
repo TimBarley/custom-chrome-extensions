@@ -42,7 +42,7 @@ async function getAutoPlayP() {
 function processDurations(durations, autoPlayP) {
   let totalTime = durations
     .map((duration) => {
-      const time = duration.innerText;
+      const time = duration.innerText.toLowerCase();
       const mIndex = time.indexOf('m');
       const minutes = parseInt(time.substring(0, mIndex));
       const seconds = parseInt(time.substring(mIndex + 1, time.length - 1));
