@@ -3,3 +3,15 @@
   padding-left: 10px;
   font-size: 0.8em;
 }
+
+.longTime {
+  color: red;
+}
+
+.mediumTime {
+  color: yellow;
+}
+
+.shortTime {
+  color: green;
+}

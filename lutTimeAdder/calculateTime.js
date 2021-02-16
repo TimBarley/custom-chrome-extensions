@@ -40,14 +40,21 @@ async function getAutoPlayP() {
 }
 
 function processDurations(durations, autoPlayP) {
-  let times = durations.map((duration) => duration.innerText);
-
-  let totalTime = times
-    .map((time) => {
+  let totalTime = durations
+    .map((duration) => {
+      const time = duration.innerText;
       const mIndex = time.indexOf('m');
       const minutes = parseInt(time.substring(0, mIndex));
       const seconds = parseInt(time.substring(mIndex + 1, time.length - 1));
-      return minutes * 60 + seconds;
+      const totalDuration = minutes * 60 + seconds;
+      if (totalDuration > 480 && totalDuration < 600) {
+        duration.className = 'mediumTime';
+      } else if (totalDuration > 600) {
+        duration.className = 'longTime';
+      } else {
+        duration.className = 'shortTime';
+      }
+      return totalDuration;
     })
     .reduce((a, b) => a + b, 0);
 
