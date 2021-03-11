@@ -54,10 +54,9 @@ const addNewElementToArticle = (article) => {
 };
 
 const getUrl = (article) => {
-  const parentSpan = article.querySelector('span[aria-label="Open Menu"]')
-    .parentNode;
   const button = article.querySelector('button[aria-label="Open Menu"]');
   button.click();
+  const parentSpan = article.querySelector('.item-menu > div');
   const url = parentSpan.querySelector(
     'div > ul > li > ul > li:nth-child(3) > a',
   ).href;
@@ -66,38 +65,34 @@ const getUrl = (article) => {
 };
 
 const getDeleteElements = (article) => {
-  const deleteSpan = article.querySelector('[aria-label="Delete"]');
-  const deleteButton = deleteSpan.getElementsByTagName('button')[0];
+  const deleteButton = article.querySelector('[aria-label="Delete"]');
   const deleteButtonSpan = deleteButton.getElementsByTagName('span')[0];
 
-  return { deleteSpan, deleteButton, deleteButtonSpan };
+  return { deleteButton, deleteButtonSpan };
 };
 
 const createGlobalLinkElements = () => {
-  const newSpan = document.createElement('span');
   const newButton = document.createElement('button');
   const newButtonSpan = document.createElement('span');
 
-  return { newSpan, newButton, newButtonSpan };
+  return { newButton, newButtonSpan };
 };
 
 const buildNewElement = (deleteElements, newElements, redirectUrl) => {
-  const { deleteSpan, deleteButton, deleteButtonSpan } = deleteElements;
-  const { newSpan, newButton, newButtonSpan } = newElements;
+  const { deleteButton, deleteButtonSpan } = deleteElements;
+  const { newButton, newButtonSpan } = newElements;
 
-  newSpan.ariaLabel = 'Global-Link';
-  newSpan.className = deleteSpan.className;
+  newButton.ariaLabel = 'Global-Link';
   newButton.className = deleteButton.className;
   newButtonSpan.className = deleteButtonSpan.className;
 
   newButtonSpan.innerHTML = iconSvg;
 
   newButton.append(newButtonSpan);
-  newSpan.append(newButton);
 
   newButton.addEventListener('click', () => window.open(redirectUrl, '_blank'));
 
-  return newSpan;
+  return newButton;
 };
 
 const iconSvg = `
