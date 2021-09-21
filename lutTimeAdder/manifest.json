@@ -4,7 +4,10 @@
   "description": "Adds totally time to LUT site",
   "content_scripts": [
     {
-      "matches": ["https://www.leveluptutorials.com/*"],
+      "matches": [
+        "https://www.leveluptutorials.com/*",
+        "https://leveluptutorials.com/*"
+      ],
       "css": ["showTime.css"],
       "js": ["calculateTime.js"]
     }

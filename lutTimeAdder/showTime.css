@@ -1,6 +1,6 @@
 .totalTime {
-  flex-grow: 1;
-  padding-left: 10px;
+  display: block;
+  margin: 20px 0px;
   font-size: 0.8em;
 }
 

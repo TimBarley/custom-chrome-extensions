@@ -5,14 +5,10 @@ const sleep = async (ms) => {
 };
 
 window.addEventListener('load', () => {
-  const main = document.getElementById('main');
-  main.addEventListener('DOMSubtreeModified', async () => {
+  const primaryDiv = document.getElementById('svelte');
+  primaryDiv.addEventListener('DOMSubtreeModified', async () => {
     if (!window.location.pathname.startsWith('/tutorials/')) {
       durations = [];
-      return;
-    }
-
-    if (durations.length > 0) {
       return;
     }
 
@@ -22,24 +18,23 @@ window.addEventListener('load', () => {
       return;
     }
 
-    const autoPlayP = await getAutoPlayP();
+    const videoList = await getVideoList();
 
-    processDurations(durations, autoPlayP);
+    processDurations(durations, videoList);
   });
 });
 
-async function getAutoPlayP() {
-  let autoPlayP;
+async function getVideoList() {
+  let videoList;
 
-  while (!autoPlayP) {
-    autoPlayP = document.querySelector('p.autoplay');
+  while (!videoList) {
+    videoList = document.querySelector('ul');
     await sleep(50);
   }
-
-  return autoPlayP;
+  return videoList;
 }
 
-function processDurations(durations, autoPlayP) {
+function processDurations(durations, videoList) {
   let totalTime = durations
     .map((duration) => {
       const time = duration.innerText.toLowerCase();
@@ -62,11 +57,13 @@ function processDurations(durations, autoPlayP) {
   let totalMinutes = Math.floor((totalTime - totalHours * 3600) / 60);
   let totalSeconds = totalTime - totalHours * 3600 - totalMinutes * 60;
 
+  if (totalHours + totalMinutes + totalSeconds <= 0) return;
+
   const newSpan = document.createElement('span');
   newSpan.className = 'totalTime';
 
   newSpan.innerText =
     'Total Time: ' + totalHours + 'h' + totalMinutes + 'm' + totalSeconds + 's';
 
-  autoPlayP.parentNode.insertBefore(newSpan, autoPlayP);
+  videoList.parentNode.insertBefore(newSpan, videoList);
 }
