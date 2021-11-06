@@ -15,3 +15,18 @@
 .shortTime {
   color: green;
 }
+
+.hasErrorInTime {
+  color: orange;
+}
+
+.errorIndicator {
+  display: inline-block;
+  background-color: red;
+  border: 1px solid red;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+  vertical-align: middle;
+}

@@ -1,4 +1,5 @@
 let durations = [];
+let hasError = false;
 
 const sleep = async (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -49,7 +50,14 @@ function processDurations(durations, videoList) {
       } else {
         duration.className = 'shortTime';
       }
-      return totalDuration;
+
+      if (totalDuration) {
+        return totalDuration;
+      } else {
+        duration.className = 'hasErrorInTime';
+        hasError = true;
+        return 0;
+      }
     })
     .reduce((a, b) => a + b, 0);
 
@@ -62,8 +70,17 @@ function processDurations(durations, videoList) {
   const newSpan = document.createElement('span');
   newSpan.className = 'totalTime';
 
-  newSpan.innerText =
-    'Total Time: ' + totalHours + 'h' + totalMinutes + 'm' + totalSeconds + 's';
+  const hasErrorText = hasError ? '<span class="errorIndicator"></span>' : '';
+
+  newSpan.innerHTML =
+    'Total Time: ' +
+    totalHours +
+    'h' +
+    totalMinutes +
+    'm' +
+    totalSeconds +
+    's' +
+    hasErrorText;
 
   videoList.parentNode.insertBefore(newSpan, videoList);
 }
