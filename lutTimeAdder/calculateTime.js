@@ -1,38 +1,24 @@
-let durations = [];
 let hasError = false;
 
 const sleep = async (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
-window.addEventListener('load', () => {
-  const primaryDiv = document.getElementById('svelte');
-  primaryDiv.addEventListener('DOMSubtreeModified', async () => {
-    if (!window.location.pathname.startsWith('/tutorials/')) {
-      durations = [];
-      return;
-    }
+window.addEventListener('load', async () => {
+  if (!window.location.pathname.startsWith('/tutorials/')) return;
 
-    durations = [...document.getElementsByClassName('duration')];
+  const durationSpans = document.getElementsByClassName('duration');
+  const durations = [...durationSpans];
 
-    if (durations.length <= 0) {
-      return;
-    }
+  if (durations.length <= 0) return;
 
-    const videoList = await getVideoList();
+  const videoList = await getVideoList(durationSpans[0]);
 
-    processDurations(durations, videoList);
-  });
+  processDurations(durations, videoList);
 });
 
-async function getVideoList() {
-  let videoList;
-
-  while (!videoList) {
-    videoList = document.querySelector('ul');
-    await sleep(50);
-  }
-  return videoList;
+async function getVideoList(firstDuration) {
+  return firstDuration.parentNode.parentNode.parentNode.parentNode;
 }
 
 function processDurations(durations, videoList) {
